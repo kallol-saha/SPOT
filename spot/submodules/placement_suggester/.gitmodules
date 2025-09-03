@@ -1,0 +1,3 @@
+[submodule "python/placement_suggester/submodules/vnn"]
+	path = python/placement_suggester/submodules/vnn
+	url = https://github.com/FlyingGiraffe/vnn.git

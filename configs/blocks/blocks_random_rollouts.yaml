@@ -1,0 +1,148 @@
+benchmark_name: three_cubes_random_rollouts
+# seed: 0
+ablation: random_rollouts
+
+eval_folder_location: assets/eval/
+eval_folders:
+  - three_cubes_heuristic
+
+num_points: 1024
+
+planner:
+  name: astar
+  num_objects: 3
+  action_cost: 0.01
+  object_ids: 2,3,4
+  max_expanded_nodes: 200
+  max_path_length: 6
+  filter_small_actions: null
+  downsample: True
+  num_points: 1024
+  max_goals: 3
+
+# Suggester parameters:
+suggester:
+  probability_weight: 1.
+  name: taxposed
+  num_suggestions: 10
+  weights: assets/weights/taxposed/epoch=2674-step=334375.ckpt
+  config_folder: ../../configs/training
+  config_file: suggester.yaml
+  x_thresh: 0.
+  y_thresh: 0.
+  z_thresh: 45.
+  min_height: 0.65
+  remove_outliers: False
+  adjust_height: False
+
+# Model Deviation Estimator (MDE) parameters:
+mde:
+  active: True
+  weight: 1.  # Relative weighting as part of g(n)
+  weights_folder: assets/weights/
+  folder_name: mde_blocks_chamfer_no_scaling  # mde_normalized_0.01_clip_minmax_centered
+  threshold: 0.50  # Not used
+  mean_centered: True
+  classifier: False
+
+object_suggester:
+  active: True
+  weights_folder: assets/weights/object_suggester_classifier
+  folder_name: block_stacking
+
+collision:
+  voxel_size: 0.01
+  prune: False  # If true, will prune based on below thresholds
+  pick_threshold: 0.17     # This is a collision ratio
+  drop_threshold: 0.10     # This is a collision ratio
+  weight: 10.  # Relative weighting as part of g(n)
+  x_width: 32
+  y_width: 32
+  z_width: 32
+  x_lower: -0.2
+  x_upper: 0.2
+  y_lower: -0.2
+  y_upper: 0.2
+  z_lower: 0.5
+  z_upper: 0.9
+  drop_height: 0.0                   # Only used for collision checking
+  remove_outliers: False
+  # inlier_ratio: 0.372 # 0.4 * 0.93          # Also used inside suggestion for filtering
+  # radius: 0.12
+  extrinsics_file: null  # "assets/extrinsics.npz"
+
+visual:
+  camera_zoom_out: 0.2   # in cm
+  point_size: 0.8
+  seg_colors:     # seg colors for block stacking, is None by default for real world
+    1: gray
+    2: red
+    3: green
+    4: blue
+  camera_params:    # camera params for visualization in sim, is None by default for real world -> because origin is the camera
+    front: [-0.901, -0.419, 0.108]
+    lookat: [0.0, 0.0, 0.693]
+    up: [0.095, 0.051, 0.994]
+    zoom: 0.70
+  graphs:
+    full_graph: True
+    pruned_graph: False
+    expanded_graph: False
+    plan_graph: True
+
+extrinsics_file: null  # "assets/extrinsics.npz"    # Should have a key "T" that contains a 4x4 transformation from camera to world
+
+# For execution
+eval_dataset_folder: assets/eval
+
+# Simulation:
+gui: False
+scene_config_folder: configs/scenes/
+scene: three_cubes
+objects_folder: assets/objects/
+max_control_iters: 1000
+tolerance: 0.001
+stability_iters: 1000
+gripper_close: 1.
+gripper_open: 0.01771439
+max_joint_force: 240.
+
+recording_camera:
+
+  output_file: execution.mp4    # Saved in the plan_folder
+  fps: 60
+
+  mode: "distance"    # or "position"
+
+  target: [0., 0., 0.8]
+
+  # For distance mode:
+  distance: 0.7
+  yaw: 20.
+  pitch: -20.
+  roll: 0.
+  up_axis_index: 2
+
+  # whether camera moves:
+  moving: False
+  yaw_limit: 160.
+  yaw_rate: 0.
+
+  # For position mode:
+  eye: [1., 1., 1.]
+  up_vec: [0., 0., 1.]
+
+  # Intrinsics:
+  width: 640
+  height: 480
+  fov: 80
+  near: 0.02
+  far: 50
+
+  # If camera is already saved somewhere:
+  view_matrix: None
+  projection_matrix: None
+
+close_gripper_record_skip: 20
+stability_record_skip: 20
+actuate_gripper_record_skip: 20

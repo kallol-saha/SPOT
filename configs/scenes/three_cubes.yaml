@@ -1,0 +1,125 @@
+robot:
+
+  # file: franka_panda/panda.urdf
+  file: spot/submodules/pybullet_planning/models/franka_description/robots/panda_arm_hand.urdf
+  pos: [-0.4, 0., 0.6]
+  orn: [0., 0., 0., 1.]
+  scale: 1.
+  fixed_base: true
+  joint_work_ratio: [45., 35, 25, 15, 5, 2, 1]
+  joints:
+    - name: roll1
+      joint_idx: 0
+      joint_value: 0.0
+    - name: pitch1
+      joint_idx: 1
+      joint_value: 0.0
+    - name: roll2
+      joint_idx: 2
+      joint_value: 0.0
+    - name: pitch2
+      joint_idx: 3
+      joint_value: 0.0
+    - name: roll3
+      joint_idx: 4
+      joint_value: 0.0
+    - name: pitch3
+      joint_idx: 5
+      joint_value: 0.0
+    - name: roll4
+      joint_idx: 6
+      joint_value: 0.0
+    - name: finger
+      joint_idx: 7
+      joint_value: 0.0
+  grasp_depth: 0.09
+
+cameras:
+
+  0:
+    mode: "distance"    # or "position"
+
+    target: [0., 0., 0.7]
+
+    # For distance mode:
+    distance: 0.8
+    yaw: 135.
+    pitch: -40.
+    roll: 0.
+    up_axis_index: 2
+
+    # For position mode:
+    eye: [1., 1., 1.]
+    up_vec: [0., 0., 1.]
+
+    # Intrinsics:
+    width: 512
+    height: 512
+    fov: 60
+    near: 0.02
+    far: 50
+
+    # If camera is already saved somewhere:
+    view_matrix: None
+    projection_matrix: None
+
+  1:
+    mode: "distance"    # or "position"
+
+    target: [0., 0., 0.7]
+
+    # For distance mode:
+    distance: 0.8
+    yaw: 45.
+    pitch: -40.
+    roll: 0.
+    up_axis_index: 2
+
+    # For position mode:
+    eye: [1., 1., 1.]
+    up_vec: [0., 0., 1.]
+
+    # Intrinsics:
+    width: 512
+    height: 512
+    fov: 60
+    near: 0.02
+    far: 50
+
+    # If camera is already saved somewhere:
+    view_matrix: None
+    projection_matrix: None
+
+
+objects:
+
+  table:
+    file: table.urdf
+    pos: [0., 0., 0.]
+    orn: [0., 0., 0., 1.]
+    scale: 1.
+    fixed_base: true
+
+  red_cube:
+    file: red_cube.urdf
+    pos: [0., 0., 0.65]
+    orn: [0., 0., 0., 1.]
+    scale: 0.05
+    grasp: [0., 0., 0.05, 1., 0., 0., 0.]     # Quaternion is x,y,z,w
+    fixed_base: false
+
+  green_cube:
+    file: green_cube.urdf
+    pos: [0., 0., 0.7]
+    orn: [0., 0., 0., 1.]
+    scale: 0.05
+    grasp: [0., 0., 0.05, 1., 0., 0., 0.]     # Quaternion is x,y,z,w
+    fixed_base: false
+
+  blue_cube:
+    file: blue_cube.urdf
+    pos: [0., 0., 0.75]
+    orn: [0., 0., 0., 1.]
+    scale: 0.05
+    grasp: [0., 0., 0.05, 1., 0., 0., 0.]     # Quaternion is x,y,z,w
+    fixed_base: false

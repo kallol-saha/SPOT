@@ -1,0 +1,30 @@
+scene: three_cubes
+exp_name: three_cubes_dynamics
+seed: 0
+gui: False
+
+scene_config_folder: configs/scenes/
+objects_folder: assets/objects/
+demo_folder: assets/data/
+weights_folder: assets/weights/
+
+# Simulation parameters:
+max_control_iters: 1000
+tolerance: 0.001
+stability_iters: 1000
+gripper_close: 1.
+gripper_open: 0.01771439
+max_joint_force: 240.
+
+# Suggester parameters:
+suggester: taxposed
+num_suggestions: 5  # aka branching factor
+model_config_file: suggester.yaml
+
+# Data collection parameters:
+mode: all_points
+num_demos: 500
+num_rollouts: 3
+normalized: True
+norm_eps: 0.01
+use_teleport: False

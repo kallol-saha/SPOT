@@ -1,0 +1,51 @@
+# Logging settings
+hydra:
+  run:
+    dir: ${log_dir}/${experiment}/${now:%Y-%m-%d_%H%M%S}
+  sweep:
+    dir: ${log_dir}/${experiment}/sweep/${now:%Y-%m-%d_%H%M%S}
+    subdir: ${hydra.job.num}
+
+wandb: True
+log_dir: logs
+experiment: 3DVTAMP
+wandb_group: experimental
+resume_id: null
+seed: 0
+
+env: table_bussing  # blocks
+exp_name: mde_table_bussing  # three_cubes_dynamics
+demo_folder: assets/data
+
+# Data loader settings
+weights_folder: assets/weights
+dataset_root: assets/data/blocks_mde
+chamfer_deviation: True
+epsilon: 0.1
+derive_deviation: False
+mean_centered: True
+object_ids: [0, 1, 2, 3]
+clip_min: null
+clip_max: 5000  # regular: 0.03, normalized: 1.5
+scaler: minmax
+
+batch_size: 16
+num_workers: 63
+
+# Trainer settings
+checkpoint_dir: checkpoints
+max_epochs: 200
+ckpt_save_freq: 250
+check_val_every_n_epoch: 10
+accelerator: gpu
+devices: 1
+
+latent_dim: 1024
+classifier: False
+learning_rate: 0.001
+
+# If regression model:
+loss_fn: mse  # mse or asym_mse
+# If using asymmetrical MSE loss:
+mse_c1: 5
+mse_c2: 1

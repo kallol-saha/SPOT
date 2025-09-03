@@ -1,0 +1,11 @@
+[submodule "spot/submodules/pyg_libs"]
+	path = spot/submodules/pyg_libs
+	url = https://github.com/r-pad/pyg_libs.git
+
+[submodule "spot/submodules/placement_suggester"]
+	path = spot/submodules/placement_suggester
+	url = git@github.com:kallol-saha/placement-suggester.git
+	
+[submodule "spot/submodules/pybullet_planning"]
+	path = spot/submodules/pybullet_planning
+	url = https://github.com/kallol-saha/pybullet-planning.git

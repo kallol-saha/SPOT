@@ -1,0 +1,48 @@
+robot:
+
+  file: franka_panda/panda.urdf
+  pos: [-0.35, 0., 0.6]
+  orn: [0., 0., 0., 1.]
+  scale: 1.
+  fixed_base: true
+  joints:
+    - name: roll1
+      joint_idx: 0
+      joint_value: 0.0
+    - name: pitch1
+      joint_idx: 1
+      joint_value: 0.0
+    - name: roll2
+      joint_idx: 2
+      joint_value: 0.0
+    - name: pitch2
+      joint_idx: 3
+      joint_value: 0.0
+    - name: roll3
+      joint_idx: 4
+      joint_value: 0.0
+    - name: pitch3
+      joint_idx: 5
+      joint_value: 0.0
+    - name: roll4
+      joint_idx: 6
+      joint_value: 0.0
+    - name: finger
+      joint_idx: 7
+      joint_value: 0.0
+
+objects:
+
+  table:
+    file: table.urdf
+    pos: [0., 0., 0.]
+    orn: [0., 0., 0., 1.]
+    scale: 1.
+    fixed_base: true
+
+  shelf:
+    file: shelf.urdf
+    pos: [0., 0., 2.]
+    orn: [0., 0., 0., 1.]
+    scale: 1.5
+    fixed_base: true

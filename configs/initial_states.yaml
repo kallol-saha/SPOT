@@ -1,0 +1,21 @@
+env: blocks
+seed: 999
+num_initial_states: 30
+benchmark_name: dp3_initial_states
+eval_folder_location: assets/eval
+
+# Simulation parameters:
+scene: three_cubes
+gui: False
+scene_config_folder: configs/scenes/
+objects_folder: assets/objects/
+demo_folder: assets/data/
+
+max_control_iters: 1000
+tolerance: 0.001
+stability_iters: 1000
+gripper_close: 1.
+gripper_open: 0.01771439
+max_joint_force: 240.
+
+recording_camera: null

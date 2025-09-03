@@ -1,0 +1,108 @@
+plan_folder: benchmarks/FINAL/random/1p2b1c/run_7 # experiments/new_execution
+seed: 17
+env: table_bussing
+
+# WHAT TO CHANGE FOR EACH TASK:
+# 1. object_names
+# 2. physically change scene
+# 3. max_path_length (set logically based on the task)
+# 4. plan_folder run number
+
+num_points: 1024
+remove_outliers: True
+adjust_height: True
+
+real_world:
+  cam_id: 0
+  input_pcd_path: real_initial_pcd.npz
+  object_names: white cup. yellow bowl. red bowl. blue plate
+
+# yellow cup. green plate. pink plate. blue bowl
+# white cup. yellow bowl. red bowl. blue plate
+
+# white cup. blue plate. yellow bowl. red bowl
+# white cup. blue plate. pink plate. red bowl
+# yellow cup. green plate. pink plate. blue bowl
+
+# Suggester parameters:
+suggester:
+  name: taxposed
+  num_suggestions: 3
+  weights: assets/weights/table_bussing_four_objects_without_origin/epoch_1359_global_step_170000.ckpt # assets/weights/table_bussing_four_objects_without_origin/epoch=749-step=93750.ckpt
+  config_folder: ../../configs/training
+  config_file: suggester.yaml
+  x_thresh: 15.
+  y_thresh: 15.
+  z_thresh: 15.
+  min_height: 0.02
+  max_height: 0.17
+  min_movement: 0.08
+  probability_weight: 0.05
+
+planner:
+  name: astar
+  num_objects: 4
+  downsample: True
+  action_cost: 0.01
+  object_ids: 0,1,2,3
+  max_expanded_nodes: 100
+  max_path_length: 1
+  path_length: 3
+  max_movements_per_object: 1,0,1,1
+  filter_small_actions: null
+  object_order: 0, 2, 1, 2
+  max_goals: 10
+
+heuristic:
+  plate_align_thresh: 0.09    # 0.07
+  bowl_align_thresh: 0.06
+  stacking_align_thresh: 0.06
+
+collision:
+  voxel_size: 0.01
+  remove_outliers: True
+  pick_threshold: 3.0     # This is a collision ratio
+  drop_threshold: 0.5     # This is a collision ratio
+  weight: 10.
+  x_width: 128
+  y_width: 128
+  z_width: 128
+  x_lower: 0.1
+  x_upper: 0.8
+  y_lower: -0.8
+  y_upper: 0.8
+  z_lower: -0.1
+  z_upper: 0.4
+  drop_height: 0.15 # 0.08                   # Only used for collision checking
+  inlier_ratio: 0.372 # 0.4 * 0.93          # Also used inside suggestion for filtering
+  radius: 0.12
+  extrinsics_file: "assets/extrinsics.npz"
+
+# Model Deviation Estimator (MDE) parameters:
+mde:
+  active: True
+  weight: 0.2
+  weights_folder: assets/weights/table_bussing_mde/
+  folder_name: mde_100plus
+  threshold: 10.
+  mean_centered: True
+  classifier: False
+
+object_suggester:
+  active: True
+  weights_folder: assets/weights/table_bussing_object_suggester/
+  folder_name: object_suggester_classifier
+  threshold: 0.0
+
+visual:
+  camera_zoom_out: 0.2   # in cm
+  point_size: 0.8
+  seg_colors: null
+  camera_params: null
+  graphs:
+    full_graph: True
+    pruned_graph: False
+    expanded_graph: True
+    plan_graph: True
+
+extrinsics_file: "assets/extrinsics.npz"    # Should have a key "T" that contains a 4x4 transformation from camera to world

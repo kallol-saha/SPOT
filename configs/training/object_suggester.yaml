@@ -1,0 +1,38 @@
+# Logging settings
+hydra:
+  run:
+    dir: ${log_dir}/${experiment}/${now:%Y-%m-%d_%H%M%S}
+  sweep:
+    dir: ${log_dir}/${experiment}/sweep/${now:%Y-%m-%d_%H%M%S}
+    subdir: ${hydra.job.num}
+
+wandb: True
+log_dir: logs
+experiment: 3DVTAMP
+wandb_group: experimental
+resume_id: null
+seed: 0
+
+env: blocks
+exp_name: three_cubes_dynamics
+demo_folder: assets/data
+
+# Data loader settings
+weights_folder: assets/weights
+dataset_root: assets/data/blocks_obj_suggester
+object_ids: [2, 3, 4]  # [0, 1, 2, 3]
+
+batch_size: 16
+num_workers: 63
+
+# Trainer settings
+checkpoint_dir: checkpoints
+max_epochs: 1000
+ckpt_save_freq: 100
+check_val_every_n_epoch: 10
+accelerator: gpu
+devices: 1
+
+latent_dim: 1024
+classifier: True
+learning_rate: 0.001

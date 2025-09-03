@@ -1,0 +1,33 @@
+# Core ML/AI packages
+huggingface-hub==0.24.7
+transformers==4.28.0
+pytorch-lightning
+torchmetrics==1.6.0
+
+# PyTorch Geometric packages with CUDA 11.7 support for PyTorch 2.0
+torch-scatter==2.1.2+pt20cu117
+torch-sparse==0.6.18+pt20cu117
+torch-cluster==1.6.3+pt20cu117
+torch-spline-conv==1.2.2+pt20cu117
+torch-geometric==2.2.0
+
+# Data processing and visualization
+pandas==2.2.2
+matplotlib
+open3d
+opencv-python
+imageio
+colour
+
+# Computer vision and segmentation
+segment_anything
+
+# Physics simulation
+pybullet
+
+# Experiment tracking
+wandb
+
+# Configuration management
+hydra-core
+
