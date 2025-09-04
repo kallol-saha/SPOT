@@ -1,2 +1,0 @@
-# PointNets
-PointNet Implementations

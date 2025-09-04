@@ -1,1 +1,0 @@
-# invariant-pose-graph
