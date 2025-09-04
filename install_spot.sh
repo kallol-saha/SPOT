@@ -5,6 +5,7 @@ echo "------------------- Creating Conda Environment -----------------"
 echo ""
 
 # Environment creation
+source $HOME/miniconda3/etc/profile.d/conda.sh
 conda create -n spot python=3.9
 conda activate spot
 
