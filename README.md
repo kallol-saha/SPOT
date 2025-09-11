@@ -79,8 +79,19 @@ If you cannot use sudo or do not want to visualize graphs, disable the global fl
 VISUALIZE_GRAPH = False  # set to True to enable graph visualization
 ```
 
-### Install SPOT:
-We use Python 3.9 within a conda environment. We use PyTorch with CUDA 11.7. Use the bash script below to complete the full installation in one command:
+### Install:
+Create a conda environment and activate it:
+```
+conda create -n spot python=3.9
+conda activate spot
+```
+
+Make sure you have CUDA 11.7 installed (required by pytorch3d, torch cluster and torch geometric):
+```
+conda install -c nvidia/label/cuda-11.7.0 cuda-toolkit
+```
+
+Use the bash script below to install the remaining dependencies:
 ```bash
 chmod +x install_spot.sh
 sh install_spot.sh

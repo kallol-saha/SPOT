@@ -1,47 +1,6 @@
 #!/bin/bash
 
 echo ""
-echo "------------------- Creating Conda Environment -----------------"
-echo ""
-
-# Environment creation
-source $HOME/miniconda3/etc/profile.d/conda.sh
-conda create -n spot python=3.9
-conda activate spot
-
-echo ""
-echo "------------------- Setting up CUDA 11.7 -----------------"
-echo ""
-
-# Install cuda 11.7 (required by pytorch3d, torch cluster and torch geometric)
-conda install -c nvidia/label/cuda-11.7.0 cuda-toolkit
-
-# Dynamically detect the active environment prefix (works for conda/mamba)
-ENV_PREFIX=${CONDA_PREFIX:-$(python3 -c 'import sys; print(sys.prefix)')}
-
-# Export variables for the current shell session
-export CUDA_HOME="$ENV_PREFIX"
-export PATH="$ENV_PREFIX/bin:$PATH"
-export LD_LIBRARY_PATH="$ENV_PREFIX/lib:$LD_LIBRARY_PATH"
-export CPATH="$ENV_PREFIX/include:$CPATH"
-
-# Persist these settings to ~/.bashrc in an idempotent and dynamic way
-cat >> "$HOME/.bashrc" <<'EOF'
-# >>> spot env paths >>>
-# Automatically set CUDA and library paths based on the active conda environment
-if [[ -n "$CONDA_PREFIX" ]]; then
-    export CUDA_HOME="$CONDA_PREFIX"
-    export PATH="$CONDA_PREFIX/bin:$PATH"
-    export LD_LIBRARY_PATH="$CONDA_PREFIX/lib:$LD_LIBRARY_PATH"
-    export CPATH="$CONDA_PREFIX/include:$CPATH"
-fi
-# <<< spot env paths <<<
-EOF
-
-source $HOME/.bashrc
-conda activate spot
-
-echo ""
 echo "------------------- Install Packages -----------------"
 echo ""
 
