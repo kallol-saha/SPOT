@@ -31,11 +31,14 @@ We present **S**earch over **P**oint Cloud **O**bject **T**ransformations (**SPO
 
 This is the official repository of [SPOT](https://planning-from-point-clouds.github.io/). If you find our work useful, please consider citing our paper:
 ```
-@inproceedings{saha2025planning,
-    title={Planning from Point Clouds over Continuous Actions for Multi-object Rearrangement},
-    author={Saha, Kallol and Li, Amber and Rodriguez-Izquierdo, Angela and Yu, Lifan and Eisner, Ben and Likhachev, Maxim and Held, David},
-    booktitle={Conference on Robot Learning (CoRL)},
-    year={2025}
+@misc{saha2025planningpointcloudscontinuous,
+      title={Planning from Point Clouds over Continuous Actions for Multi-object Rearrangement}, 
+      author={Kallol Saha and Amber Li and Angela Rodriguez-Izquierdo and Lifan Yu and Ben Eisner and Maxim Likhachev and David Held},
+      year={2025},
+      eprint={2509.04645},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2509.04645}, 
 }
 ```
 If you find any bugs in the code, or have any questions, feel free to raise an issue.
